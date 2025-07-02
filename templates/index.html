@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamond Price Prediction | Professional ML Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/enhanced_style.css') }}" />
+</head>
+<body>
+  <div class="animated-bg"></div>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <h1 class="logo-text">DiamondML</h1>
+        <span class="logo-subtitle">Professional Price Prediction</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content container">
+    <section class="hero">
+      <div class="hero-content">
+        <h2 class="hero-title">Advanced Diamond Price Prediction</h2>
+        <p class="hero-description">
+          Enter your diamond specifications below for an instant, ML-powered valuation.
+        </p>
+      </div>
+    </section>
+
+    <section class="prediction-section">
+      <div class="form-card">
+        <div class="form-header">
+          <h3 class="form-title">Diamond Specifications</h3>
+          <p class="form-subtitle">Provide precise values for best accuracy</p>
+        </div>
+
+        <form class="prediction-form" action="{{ url_for('predict_datapoint') }}" method="POST">
+          <!-- Physical Properties -->
+          <div class="form-section">
+            <h4 class="section-title">Physical Properties</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="carat">Carat Weight <span class="required">*</span></label>
+                <input class="form-input" type="number" step="0.01" name="carat" id="carat" placeholder="e.g., 1.25" required />
+                <small class="input-help">Range 0.01 – 5.00 ct</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="depth">Depth % <span class="required">*</span></label>
+                <input class="form-input" type="number" step="0.1" name="depth" id="depth" placeholder="e.g., 61.5" required />
+                <small class="input-help">Typical 43 – 79 %</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="table">Table % <span class="required">*</span></label>
+                <input class="form-input" type="number" step="0.1" name="table" id="table" placeholder="e.g., 57.0" required />
+                <small class="input-help">Facet width 43 – 95 %</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimensions -->
+          <div class="form-section">
+            <h4 class="section-title">Dimensions (mm)</h4>
+            <div class="form-grid dimensions-grid">
+              <div class="form-group">
+                <label class="form-label" for="x">Length (X)</label>
+                <input class="form-input" type="number" step="0.01" name="x" id="x" placeholder="6.23" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="y">Width (Y)</label>
+                <input class="form-input" type="number" step="0.01" name="y" id="y" placeholder="6.18" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="z">Height (Z)</label>
+                <input class="form-input" type="number" step="0.01" name="z" id="z" placeholder="3.82" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Quality Grades -->
+          <div class="form-section">
+            <h4 class="section-title">Quality Grades</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="cut">Cut Quality</label>
+                <select class="form-select" name="cut" id="cut" required>
+                  <option value="">Select</option>
+                  <option>Fair</option><option>Good</option><option>Very Good</option>
+                  <option>Premium</option><option>Ideal</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="color">Color Grade</label>
+                <select class="form-select" name="color" id="color" required>
+                  <option value="">Select</option>
+                  <option>D</option><option>E</option><option>F</option>
+                  <option>G</option><option>H</option><option>I</option><option>J</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="clarity">Clarity Grade</label>
+                <select class="form-select" name="clarity" id="clarity" required>
+                  <option value="">Select</option>
+                  <option>IF</option><option>VVS1</option><option>VVS2</option>
+                  <option>VS1</option><option>VS2</option>
+                  <option>SI1</option><option>SI2</option><option>I1</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Button at the bottom center -->
+          <div class="form-actions">
+            <button class="submit-btn" type="submit">
+              <span class="btn-text">Get Price Prediction</span>
+              <span class="btn-icon">💎</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    {% if results %}
+    <section class="results-section">
+      <div class="result-card">
+        <div class="result-header">
+          <h3 class="result-title">Price Prediction</h3>
+          <div class="result-badge">✓ Complete</div>
+        </div>
+        <div class="price-display">
+          <span class="currency">$</span>
+          <span class="price-value">{{ results }}</span>
+          <span class="price-label">USD</span>
+        </div>
+        <p class="result-description">
+          Estimated retail value based on current market data.
+        </p>
+        <small class="disclaimer">
+          *Predictions are approximations; actual prices may vary.
+        </small>
+      </div>
+    </section>
+    {% endif %}
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">© 2025 DiamondML · Created by Tushar Chaudhary</p>
+  </footer>
+</body>
+</html>
