@@ -87,9 +87,3 @@ An API endpoint is also available to accept POST requests and return price predi
 
 ---
 
-## 📦 Requirements
-
-Install all required Python libraries:
-
-```bash
-pip install -r requirements.txt
